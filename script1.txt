@@ -1,0 +1,191 @@
+Script started on 2017-10-13 09:42:27-0600
+]0;pgabough@csa2:~/Desktop/assignment2pgabough@csa2:~/Desktop/assignment2$ gdb assign2a
+GNU gdb (GDB) Fedora 8.0-13.fc26
+Copyright (C) 2017 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.  Type "show copying"
+and "show warranty" for details.
+This GDB was configured as "aarch64-redhat-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+<http://www.gnu.org/software/gdb/bugs/>.
+Find the GDB manual and other documentation resources online at:
+<http://www.gnu.org/software/gdb/documentation/>.
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from assign2a...(no debugging symbols found)...done.
+(gdb) display/i $pc
+1: x/i $pc
+<error: No registers.>
+(gdb) b *main
+Breakpoint 1 at 0x400620
+(gdb) b res
+Breakpoint 2 at 0x4006b4
+(gdb) r
+Starting program: /home/uga/pgabough/Desktop/assignment2/assign2a 
+
+Breakpoint 1, 0x0000000000400620 in main ()
+1: x/i $pc
+=> 0x400620 <main>:	stp	x29, x30, [sp, #-16]!
+(gdb) ni
+0x0000000000400624 in main ()
+1: x/i $pc
+=> 0x400624 <main+4>:	mov	x29, sp
+(gdb) ni
+0x0000000000400628 in main ()
+1: x/i $pc
+=> 0x400628 <main+8>:	mov	w20, #0xffffe000            	// #-8192
+(gdb) ni
+0x000000000040062c in main ()
+1: x/i $pc
+=> 0x40062c <main+12>:	mov	w19, #0x63                  	// #99
+(gdb) ni
+0x0000000000400630 in main ()
+1: x/i $pc
+=> 0x400630 <main+16>:	mov	w21, #0x0                   	// #0
+(gdb) ni
+0x0000000000400634 in main ()
+1: x/i $pc
+=> 0x400634 <main+20>:	adrp	x0, 0x400000
+(gdb) p $w20
+$1 = 4294959104
+(gdb) p/x $w20
+$2 = 0xffffe000
+(gdb) p $w19
+$3 = 99
+(gdb) p $w21
+$4 = 0
+(gdb) ni
+0x0000000000400638 in main ()
+1: x/i $pc
+=> 0x400638 <main+24>:	add	x0, x0, #0x5a4
+(gdb) ni
+0x000000000040063c in main ()
+1: x/i $pc
+=> 0x40063c <main+28>:	mov	w1, w19
+(gdb) ni
+0x0000000000400640 in main ()
+1: x/i $pc
+=> 0x400640 <main+32>:	mov	w2, w19
+(gdb) ni
+0x0000000000400644 in main ()
+1: x/i $pc
+=> 0x400644 <main+36>:	mov	w3, w20
+(gdb) ni
+0x0000000000400648 in main ()
+1: x/i $pc
+=> 0x400648 <main+40>:	mov	w4, w20
+(gdb) ni
+0x000000000040064c in main ()
+1: x/i $pc
+=> 0x40064c <main+44>:	bl	0x400490 <printf@plt>
+(gdb) ni
+multiplier = 0x00000063 (99) multiplicand = 0xffffe000 (-8192)
+
+0x0000000000400650 in main ()
+1: x/i $pc
+=> 0x400650 <main+48>:	mov	w22, #0x0                   	// #0
+(gdb) ni
+0x0000000000400654 in main ()
+1: x/i $pc
+=> 0x400654 <main+52>:	cmp	w19, #0x0
+(gdb) ni
+0x0000000000400658 in main ()
+1: x/i $pc
+=> 0x400658 <main+56>:	b.ge	0x400660 <loop>  // b.tcont
+(gdb) ni
+product = 0xffffffff multiplier = 0xfff3a000
+
+Breakpoint 2, 0x00000000004006b4 in res ()
+1: x/i $pc
+=> 0x4006b4 <res>:	sxtw	x23, w21
+(gdb) p $w20
+$5 = 4294959104
+(gdb) p/x $w20
+$6 = 0xffffe000
+(gdb) p $w21
+$7 = 4294967295
+(gdb) p/x $w21
+$8 = 0xffffffff
+(gdb) p $w19
+$9 = 4294156288
+(gdb) p/x $w19
+$10 = 0xfff3a000
+(gdb) ni
+0x00000000004006b8 in res ()
+1: x/i $pc
+=> 0x4006b8 <res+4>:	lsl	x23, x23, #32
+(gdb) ni
+0x00000000004006bc in res ()
+1: x/i $pc
+=> 0x4006bc <res+8>:	sxtw	x24, w19
+(gdb) ni
+0x00000000004006c0 in res ()
+1: x/i $pc
+=> 0x4006c0 <res+12>:	and	x24, x24, #0xffffffff
+(gdb) ni
+0x00000000004006c4 in res ()
+1: x/i $pc
+=> 0x4006c4 <res+16>:	add	x25, x23, x24
+(gdb) ni
+0x00000000004006c8 in done ()
+1: x/i $pc
+=> 0x4006c8 <done>:	adrp	x0, 0x400000
+(gdb) p $w19
+$11 = 4294156288
+(gdb) p $x24
+$12 = 4294156288
+(gdb) p $w21
+$13 = 4294967295
+(gdb) p $x23
+$14 = -4294967296
+(gdb) p $x25
+$15 = -811008
+(gdb) info register
+x0             0x2d	45
+x1             0x0	0
+x2             0xa05e01580374f000	-6891068902303535104
+x3             0x0	0
+x4             0x0	0
+x5             0x42103d	4329533
+x6             0xa	10
+x7             0xa	10
+x8             0x40	64
+x9             0x0	0
+x10            0x8	8
+x11            0xfffffffff018	281474976706584
+x12            0x0	0
+x13            0xfff3a000	4294156288
+x14            0x0	0
+x15            0xfffffffff010	281474976706576
+x16            0x0	0
+x17            0xffffb7e52ea8	281473766993576
+x18            0x30	48
+x19            0xfff3a000	4294156288
+x20            0xffffe000	4294959104
+x21            0xffffffff	4294967295
+x22            0x20	32
+---Type <return> to continue, or q <return> to quit---return
+x23            0xffffffff00000000	-4294967296
+x24            0xfff3a000	4294156288
+x25            0xfffffffffff3a000	-811008
+x26            0x0	0
+x27            0x0	0
+x28            0x0	0
+x29            0xfffffffff150	281474976706896
+x30            0x4006b4	4196020
+sp             0xfffffffff150	0xfffffffff150
+pc             0x4006c8	0x4006c8 <done>
+cpsr           0x60200000	[ EL=0 SS C Z ]
+fpsr           0x0	0
+fpcr           0x0	0
+(gdb) c
+Continuing.
+64-bit result = 0xfffffffffff3a000 (-811008)
+[Inferior 1 (process 11575) exited with code 055]
+(gdb) q
+]0;pgabough@csa2:~/Desktop/assignment2pgabough@csa2:~/Desktop/assignment2$ exit
+exit
+
+Script done on 2017-10-13 09:55:09-0600
